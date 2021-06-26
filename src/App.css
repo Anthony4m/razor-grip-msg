@@ -1,38 +1,91 @@
-.App {
-  text-align: center;
+
+
+
+.chat-header{
+    color: var(--text-color-a);
+    background-color: var(--dark-color-background-b);
+    border-top-left-radius: 5px ;
+    border-top-right-radius: 5px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.chat-sidebar{
+    background-color: var(--dark-color-background-b);
+    color: var(--text-color-a);
+    padding: 20px 20px 60px;
+    overflow-y: hidden;
+}
+.chat-sidebar h2{
+     font-size: 20px;
+     padding: 10px;
+     margin-bottom: 20px;
+ }
+.chat-sidebar ul li{
+    padding: 10px 0;
+}
+.chat-view{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.chats{
+    padding: 30px;
+    max-height: 65vh;
+    overflow-y: scroll;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.chat-bubble{
+    margin-bottom: 3px;
+    padding: 5px 10px;
+    clear: both;
+    border-radius: 10px 10px 2px 2px;
 }
 
-.App-link {
-  color: #61dafb;
+.sender-messages{
+    background-color: var(--dark-color-sender-bg);
+    width: 20em;
+    color: var(--text-color-a);
+    float: right;
+    border-bottom-right-radius: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.receiver-messages{
+    background-color: var(--dark-color-receiver-bg);
+    width: 20em;
+    color: var(--text-color-a);
+    float: left;
+    border-bottom-right-radius: 10px;
+}
+
+.chats .meta{
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--dark-color-background-list-a);
+    opacity: 0.7;
+    margin-bottom: 7px;
+}
+
+
+.chat-input-form{
+    padding: 20px;
+    background-color: var(--dark-color-background-a);
+}
+
+.chat-input-form form{
+    display: flex;
+}
+
+.chat-input-form input[type = "text"] {
+    font-size: 16px;
+    padding: 5px;
+    height: 20px;
+    border-radius: 50px;
+    flex: 1;
+}
+
+.message-btn{
+border-radius: 50%;
 }
