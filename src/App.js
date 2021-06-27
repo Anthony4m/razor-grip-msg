@@ -13,16 +13,17 @@ function App() {
     const [text,setText] = useState('')
     useEffect(()=>{
         console.log("here")
-
+        //indicate handshake has occured between client and server
         socket.on('node',message=>{
             setmessage(message)
         })
-        socket.emit('react','hello from react')
+        //message sent to server
+        socket.emit('client','hello from client')
     });
 
      const sendmessage = (e)=>{
          e.preventDefault()
-         socket.emit("react",text);
+         socket.emit("client",text);
          setClientMessage(text);
      }
   return (
