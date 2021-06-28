@@ -1,15 +1,16 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Navbar from "./layout/Navbar";
 import MainChat from "./layout/MainChat";
+import useSocketConnection from "../hooks/useSocketConnection";
+
 const Home = ()=>{
+    const message = useSocketConnection();
+    console.log(message)
     return(
-        <Router>
         <div className="home-view">
             <Navbar/>
             <MainChat/>
         </div>
-        </Router>
     )
 }
 export default Home;

@@ -1,80 +1,41 @@
-import React from 'react';
-import ChatForm from "./ChatForm";
- const ChatPage = ()=>{
+import React, {useState} from 'react';
+
+const ChatPage = ({name,receiverMessage})=>{
+     const [senderMessage,setSenderMessage] = useState('');
+     const [inputText,setInputText] = useState('');
+     const handleSenderMessage = (e)=>{
+         e.preventDefault();
+         setSenderMessage(inputText)
+     }
      return(
          <div className="chats-page">
          <div className="chats">
-             <div className="sender-messages chat-bubble">
-                 <p className="meta">Kofi <span>9:12pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="sender-messages chat-bubble">
-                 <p className="meta">Kofi <span>9:12pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="sender-messages chat-bubble">
-                 <p className="meta">Kofi <span>9:12pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div><div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
-             <div className="receiver-messages chat-bubble">
-                 <p className="meta">Kwame <span>9:30pm</span></p>
-                 <p className="message">	Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi,
-                     repudiandae.</p>
-             </div>
+             {receiverMessage &&<div className="sender-messages chat-bubble">
+                 <p className="meta">{name} <span>9:12pm</span></p>
+                 <p className="message">{receiverMessage}</p>
+             </div>}
+             {senderMessage &&<div className="receiver-messages chat-bubble">
+                 <p className="meta">{name} <span>9:12pm</span></p>
+                 <p className="message">{senderMessage}</p>
+             </div>}
+
+             {/*<div className="sender-messages chat-bubble">*/}
+             {/*    <p className="meta">{name} <span>9:12pm</span></p>*/}
+             {/*    <p className="message">{receiverMessage}</p>*/}
+             {/*</div>*/}
+             {/*<div className="receiver-messages chat-bubble">*/}
+             {/*    <p className="meta">{name} <span>9:30pm</span></p>*/}
+             {/*    <p className="message">{senderMessage}</p>*/}
+             {/*</div>*/}
          </div>
-            <ChatForm/>
+             <div className="chat-input-form">
+                 <form onSubmit={handleSenderMessage} id="chat-input">
+                     <input onChange={event => setInputText(event.target.value)} type="text" required={true} placeholder="Type a msg"  id="msg"/>
+                     <button type="submit" className="message-btn">Send</button>
+                 </form>
+
+             </div>
+            {/*<ChatForm/>*/}
          </div>
      )
  }

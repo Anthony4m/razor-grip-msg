@@ -1,13 +1,12 @@
 import React from 'react';
 import Sidebar from "./Sidebar";
 import ChatPage from "./ChatPage";
-import ChatForm from "./ChatForm";
 
-const MainChat = ()=>{
+const MainChat = ({name,senderMessage,receiverMessage})=>{
     return(
         <main className="chat-view">
             <Sidebar/>
-            <ChatPage/>
+            <ChatPage name={name} receiverMessage={receiverMessage}/>
         </main>
     )
 }
