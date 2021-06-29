@@ -1,13 +1,12 @@
 import React from 'react';
 import Sidebar from "./Sidebar";
-import ChatPage from "./ChatPage";
 
-const MainChat = ({name,senderMessage,receiverMessage})=>{
+const MainChat = ({username})=>{
     return(
-        <main className="chat-view">
-            <Sidebar/>
-            <ChatPage name={name} receiverMessage={receiverMessage}/>
-        </main>
-    )
+        <div className="d-flex main-chat">
+            <Sidebar username={username}/>
+        </div>
+
+)
 }
 export default MainChat;

@@ -1,0 +1,17 @@
+{
+  "messages": [
+    {
+      "time": "9:00pm",
+      "body": "Why do we use it?\nIt is a long established fact that a reader will be",
+      "sender": "mario",
+      "id": 1
+    },
+    {
+      "time": "6:00pm",
+      "body": "Why doa",
+      "author": "yoshi",
+      "sender": "Abena",
+      "id": 2
+    }
+  ]
+}

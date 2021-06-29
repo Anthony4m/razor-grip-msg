@@ -2,8 +2,12 @@
 
 .home-view{
     overflow: hidden;
-    max-height: 100vh;
+    height: 100vh;
     margin: 30px auto;
+}
+
+.main-chat{
+    height: 100vh;
 }
 .chat-header{
     color: var(--text-color-a);
@@ -17,6 +21,7 @@
 }
 
 .chat-sidebar{
+    width: 250px;
     background-color: var(--dark-color-background-b);
     color: var(--text-color-a);
     padding: 20px 20px 60px;

@@ -11,16 +11,11 @@ const useSocketConnection = () =>{
     useEffect(()=>{
         console.log('here')
 
-        socket.on("node",message=>{
+        socket.on("message",message=>{
             setMessage(message)
         })
         socket.emit("client","hello from client ")
-    });
-     const sendmessage = (e)=>{
-         e.preventDefault()
-         socket.emit("react",text);
-         setClientMessage(text);
-     }
+    },[]);
      return message;
 }
 
