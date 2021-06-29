@@ -2,16 +2,20 @@ import React, {useState} from 'react';
 import {Button, Modal, Nav, Tab} from "react-bootstrap";
 import Users from "../Users";
 import Chats from "../Chats";
-import NewChatsModal from "../NewChatsModel";
-import NewUsersModal from "../NewUsersModel";
+import NewChatsModal from "../NewUsersModal";
+import NewUsersModal from "../NewChatsModal";
 
 const Sidebar = ({username})=>{
      const chatKey = 'chats';
      const usersKey = 'users';
+     //which tab is opened
      const [activeKey,setActiveKey] = useState(chatKey);
+     //open and close modal
      const [modalOpen,setModalOpen] = useState(false);
+     // switch between the users page and the chats page
      const chatsOpen = activeKey === chatKey;
      const modalClose = ()=>{
+        // closes modal if opened
         setModalOpen(false)
      }
     return(
@@ -48,8 +52,8 @@ const Sidebar = ({username})=>{
 
             <Modal show={modalOpen} onHide={modalClose}>
                 {chatsOpen ?
-                <NewChatsModal modalClose={modalClose}/> :
-                    <NewUsersModal modalClose={modalClose}/>
+                <NewUsersModal modalClose={modalClose}/> :
+                    <NewChatsModal modalClose={modalClose}/>
                 }
             </Modal>
         </div>

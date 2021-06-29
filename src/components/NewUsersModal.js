@@ -1,11 +1,16 @@
 import React, {useRef} from 'react';
-import {Form, Modal} from "react-bootstrap";
+import {Button, Form, Modal} from "react-bootstrap";
+import {useUsers} from "../context/UsersProvider";
 
-const NewChatsModal = ()=>{
+const NewChatsModal = ({modalClose})=>{
     const usernameRef = useRef();
+    const {addUser} = useUsers();
     const handleSubmit = (e)=>{
         e.preventDefault()
+        addUser(usernameRef.current.value)
+        modalClose()
     }
+
     return(
         <React.Fragment>
             <Modal.Header closeButton>
@@ -17,6 +22,7 @@ const NewChatsModal = ()=>{
                         <Form.Label>username</Form.Label>
                         <Form.Control type ="text"  ref={usernameRef} required />
                     </Form.Group>
+                    <Button type="submit">Add User</Button>
                 </Form>
             </Modal.Body>
         </React.Fragment>
