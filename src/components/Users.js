@@ -1,14 +1,14 @@
 import React from 'react';
 import {ListGroup} from "react-bootstrap";
-import {useUsers} from "../context/UsersProvider";
+import {useContacts} from "../context/ContactsProvider";
 
 const Users = ()=>{
-    const {users} = useUsers();
+    const {contacts} = useContacts();
     return(
         <ListGroup variant = 'flush'>
-            {users.map(user=>(
-                <ListGroup.Item key={user.username}>
-                    {user.username}
+            {contacts.map(contact=>(
+                <ListGroup.Item key={contact.username}>
+                    {contact.username}
                 </ListGroup.Item>
             ))}
         </ListGroup>

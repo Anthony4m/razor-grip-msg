@@ -4,10 +4,12 @@ import Users from "../Users";
 import Chats from "../Chats";
 import NewChatsModal from "../NewUsersModal";
 import NewUsersModal from "../NewChatsModal";
+import Online from "../Online";
 
 const Sidebar = ({username})=>{
      const chatKey = 'chats';
      const usersKey = 'users';
+     const onlineKey = 'online';
      //which tab is opened
      const [activeKey,setActiveKey] = useState(chatKey);
      //open and close modal
@@ -33,6 +35,11 @@ const Sidebar = ({username})=>{
                                 Users
                           </Nav.Link>
                       </Nav.Item>
+                      <Nav.Item>
+                          <Nav.Link eventKey={onlineKey}>
+                                Users Online
+                          </Nav.Link>
+                      </Nav.Item>
                   </Nav>
                   <Tab.Content className="overflow-auto flex-grow-1">
                       <Tab.Pane eventKey ={chatKey}>
@@ -40,6 +47,9 @@ const Sidebar = ({username})=>{
                       </Tab.Pane>
                       <Tab.Pane eventKey ={usersKey}>
                           <Users/>
+                      </Tab.Pane>
+                      <Tab.Pane eventKey ={onlineKey}>
+                          <Online/>
                       </Tab.Pane>
                   </Tab.Content>
                   <div className="p-2">

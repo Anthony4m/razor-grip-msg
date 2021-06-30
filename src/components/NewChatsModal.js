@@ -1,26 +1,26 @@
 import React, {useState} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
-import {useUsers} from "../context/UsersProvider";
+import {useContacts} from "../context/ContactsProvider";
 import {useChats} from "../context/ChatsProvider";
 
 const NewUsersModal = ({modalClose})=>{
-    const {users} = useUsers()
-    const {addChat} = useChats()
-    const [selectedUsername,setSelectedUsername] = useState([]);
+    const {contacts} = useContacts()
+    const {createChat} = useChats()
+    const [selectedContactName,setSelectedContactName] = useState([]);
     const handleSubmit = (e)=>{
         e.preventDefault();
-        addChat(selectedUsername)
+        createChat(selectedContactName)
         modalClose()
     }
     const handleCheckboxChange = (username)=>{
-        setSelectedUsername(prevSelectedUsername=>{
+        setSelectedContactName(prevSelectedContactName=>{
             // if username alredy selected remove else add it to selected users
-            if (prevSelectedUsername.includes(username)){
-                return prevSelectedUsername.filter(prevId =>{
+            if (prevSelectedContactName.includes(username)){
+                return prevSelectedContactName.filter(prevId =>{
                     return username !== prevId
                 })
             } else {
-                return [...prevSelectedUsername,username]
+                return [...prevSelectedContactName,username]
             }
         })
     }
@@ -31,12 +31,12 @@ const NewUsersModal = ({modalClose})=>{
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
-                    {users.map(user=>(
-                        <Form.Group controlId={user.username} key={user.username}>
+                    {contacts.map((contact,index)=>(
+                        <Form.Group controlId={contact.username} key={contact.username}>
                             <Form.Check type="checkbox"
-                                        value={selectedUsername.includes(user.username)}
-                                        label={user.username}
-                                        onChange={()=> handleCheckboxChange(user.username)}
+                                        value={selectedContactName.includes(contact.username)}
+                                        label={contact.username}
+                                        onChange={()=> handleCheckboxChange(contact.username)}
                             />
                         </Form.Group>
                     ))}

@@ -1,72 +1,59 @@
-import React, {useState} from 'react';
-import useSocketConnection from "../../hooks/useSocketConnection";
-import socketIOClient from "socket.io-client";
+import React, {useCallback, useState} from 'react'
+import {Button, Form, InputGroup} from "react-bootstrap";
+import {useChats} from "../../context/ChatsProvider";
 
-
-const ENDPOINT = 'http://127.0.0.1:3001/'
-const ChatPage = ({name,receiverMessage})=>{
-    const socket = socketIOClient(ENDPOINT)
-     const [senderMessage,setSenderMessage] = useState('');
-     const [inputText,setInputText] = useState('');
-    const receivedmessage = useSocketConnection();
-    const handleReceived = (message)=>{
-        const div = document.createElement('div');
-        div.classList.add('receiver-messages','chat-bubble');
-        div.innerHTML = ` <p className="meta">${name} <span>9:12pm</span></p>
-                 <p className="message">${message}</p>`
-        // setSenderMessage(inputText)
-        // useSocketConnection()
-        //Sender Message Text
-        document.querySelector('.chats').appendChild(div);
+const ChatPage = ()=>{
+    const [input,setInput] = useState('');
+    //scrolls to the current message sent
+    const setCurrentMessageRef = useCallback(place =>{
+        if (place){
+            place.scrollIntoView({smooth:true})
+        }
+        },[])
+    const {sendMessage,selectedChat} = useChats();
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+            console.log(input);
+        sendMessage(
+            selectedChat.recipients.map(r => r.id),
+            input
+        )
+        setInput('')
     }
-     const handleSenderMessage = (e)=>{
-         e.preventDefault();
-          const div = document.createElement('div');
-          div.classList.add('sender-messages','chat-bubble');
-          div.innerHTML = ` <p className="meta">${name} <span>9:12pm</span></p>
-                 <p className="message">${senderMessage}</p>`
-         // setSenderMessage(inputText)
-         // useSocketConnection()
-         //Sender Message Text
-         document.querySelector('.chats').appendChild(div);
-         socket.emit('senderMessage',senderMessage)
-         setSenderMessage('');
-     }
      return(
-         <div className="chats-page">
-         <div className="chats">
-             {/*{receiverMessage && <div>*/}
-             {/*    {(receiverMessage.map(message)=>(*/}
-             {/*        <div className="sender-messages chat-bubble">*/}
-             {/*        <p className="meta">{name} <span>9:12pm</span></p>*/}
-             {/*        <p className="message">{receiverMessage}</p>*/}
-             {/*        </div>*/}
-             {/*        ))}</div>}*/}
-             {receivedmessage && handleReceived(receivedmessage)
-             // <div>
-             //     <div className="receiver-messages chat-bubble">
-             //     <p className="meta">{name} <span>9:12pm</span></p>
-             //     <p className="message">{receivedmessage}</p>
-             // </div></div>
-             }
-
-             {/*<div className="sender-messages chat-bubble">*/}
-             {/*    <p className="meta">{name} <span>9:12pm</span></p>*/}
-             {/*    <p className="message">{receivedmessage}</p>*/}
-             {/*</div>*/}
-             {/*<div className="receiver-messages chat-bubble">*/}
-             {/*    <p className="meta">{name} <span>9:30pm</span></p>*/}
-             {/*    <p className="message">{senderMessage}</p>*/}
-             {/*</div>*/}
-         </div>
-             <div className="chat-input-form">
-                 <form onSubmit={handleSenderMessage} id="chat-input">
-                     <input onChange={event => setSenderMessage(event.target.value)} value={senderMessage} type="text" required placeholder="Type a msg"  id="msg"/>
-                     <button type="submit" className="message-btn">Send</button>
-                 </form>
-
+         <div className="d-flex flex-column flex-grow-1">
+             <div className="flex-grow-1 overflow-auto">
+                <div className=" d-flex flex-column align-items-start justify-content-end px-3">
+                    {selectedChat.messages.map((message,index)=>{
+                        const currentMessage = selectedChat.messages.length - 1 === index
+                        return (
+                            <div ref={currentMessage ? setCurrentMessageRef : null}
+                                key={index}
+                                 className={`my-1 d-flex flex-column ${message.messageOrigin ? `align-self-end` : ''}`}
+                            >
+                                <div className={`rounded px-2 py-1 ${message.messageOrigin ? 'bg-primary text-white' : 'border'}`}>{message.text}</div>
+                                <div className={`text-muted small ? {message.messageOrigin ? 'text-right' : ''}`}>{message.messageOrigin ? "You": message.sentBy}</div>
+                            </div>
+                        )})
+                    }
+                </div>
              </div>
-            {/*<ChatForm/>*/}
+             <Form onSubmit={handleSubmit}>
+                 <Form.Group className="m-2">
+                     <InputGroup>
+                         <Form.Control
+                             as="textarea"
+                             required
+                             value={input}
+                             onChange={e => setInput(e.target.value)}
+                             style={{ height: '75px', resize: 'none' }}
+                         />
+                         <InputGroup.Append>
+                             <Button type="submit">Send</Button>
+                         </InputGroup.Append>
+                     </InputGroup>
+                 </Form.Group>
+             </Form>
          </div>
      )
  }

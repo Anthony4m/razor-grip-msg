@@ -1,13 +1,13 @@
 import React, {useRef} from 'react';
 import {Button, Form, Modal} from "react-bootstrap";
-import {useUsers} from "../context/UsersProvider";
+import {useContacts} from "../context/ContactsProvider";
 
 const NewChatsModal = ({modalClose})=>{
     const usernameRef = useRef();
-    const {addUser} = useUsers();
+    const {createContact} = useContacts();
     const handleSubmit = (e)=>{
         e.preventDefault()
-        addUser(usernameRef.current.value)
+        createContact(usernameRef.current.value)
         modalClose()
     }
 
