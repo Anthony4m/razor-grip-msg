@@ -15,7 +15,7 @@ const ChatPage = ()=>{
         e.preventDefault()
             console.log(input);
         sendMessage(
-            selectedChat.recipients.map(r => r.id),
+            selectedChat.recipients.map(receiver => receiver.id),
             input
         )
         setInput('')

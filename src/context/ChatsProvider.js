@@ -1,7 +1,8 @@
-import React, {useContext, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import useLocalStorage from '../hooks/useLocalStorage';
 import {useContacts} from './ContactsProvider';
 import {useAuth0} from "@auth0/auth0-react";
+import {useSocket} from "./ServerConnectionProvider";
 
 const ChatsContext = React.createContext()
 
@@ -13,6 +14,7 @@ export function ChatsProvider({ children , sendor}) {
     const {user} = useAuth0();
     const [chats, setChats] = useLocalStorage('conversations', [])
     const [selectedChatIndex, setSelectedChatIndex] = useState(0)
+    const socket = useSocket()
     const { contacts } = useContacts()
 
 
@@ -23,7 +25,7 @@ export function ChatsProvider({ children , sendor}) {
         })
     }
 
-    const addMessageToChat = ({ recipients, text, sender }) => {
+    const addMessageToChat = useCallback(({ recipients, text, sender }) => {
         setChats(prevChats => {
             let chatExist = false
             const newMessage = { sender, text }
@@ -48,10 +50,20 @@ export function ChatsProvider({ children , sendor}) {
                 ]
             }
         })
-    }
+    },[setChats])
 
+    //reciving message
+    useEffect(() => {
+        if (socket == null) return
 
+        socket.on('received-message', addMessageToChat)
+
+        return () => socket.off('received-message')
+    }, [socket, addMessageToChat])
+
+    //sending messages
     function sendMessage(recipients, text) {
+        socket.emit('send-message', { recipients, text })
         addMessageToChat({ recipients, text, sender: user.given_name })
     }
     //Formating output user to be easier o work with checks if user is selected
