@@ -1,8 +1,17 @@
 import React from "react";
+import {useSocket} from "../context/ServerConnectionProvider";
+import {ListGroup} from "react-bootstrap";
 
 const Online = ()=>{
+    const {usersOnline} = useSocket()
     return(
-        <div>Online</div>
+        <ListGroup variant = 'flush'>
+            {usersOnline.map((userOnline,index)=>(
+                <ListGroup.Item key={index}>
+                    {userOnline['usersOnline']}
+                </ListGroup.Item>
+            ))}
+        </ListGroup>
     )
 }
 

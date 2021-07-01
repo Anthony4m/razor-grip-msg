@@ -13,8 +13,9 @@ export function useChats() {
 export function ChatsProvider({ children , sendor}) {
     const {user} = useAuth0();
     const [chats, setChats] = useLocalStorage('conversations', [])
+    const [usersOnline,setUsersOnline] = useState({})
     const [selectedChatIndex, setSelectedChatIndex] = useState(0)
-    const socket = useSocket()
+    const {socket} = useSocket()
     const { contacts } = useContacts()
 
 
@@ -57,9 +58,23 @@ export function ChatsProvider({ children , sendor}) {
         if (socket == null) return
 
         socket.on('received-message', addMessageToChat)
-
+        socket.on('loggedIn-users',loggedin=>{
+            setUsersOnline(loggedin)
+            // console.log(usersOnline)
+        })
         return () => socket.off('received-message')
-    }, [socket, addMessageToChat])
+    }, [socket, addMessageToChat,usersOnline])
+    // //reciving message
+    // useEffect(() => {
+    //     if (socket == null) return
+    //     socket.on('loggedIn-users',loggedin=>{
+    //         // setUsersOnline(loggedin)
+    //         setUsersOnline(prevUsers => {
+    //             return [...prevUsers,{loggedin}]
+    //         })
+    //         console.log(usersOnline)
+    //     })
+    // },[usersOnline])
 
     //sending messages
     function sendMessage(recipients, text) {
@@ -87,6 +102,8 @@ export function ChatsProvider({ children , sendor}) {
             const messageOrigin = sendor === message.sender
             return {...message,sentBy:name,messageOrigin}
         })
+
+
 
 // if user selected output user
         const selected = index === selectedChatIndex

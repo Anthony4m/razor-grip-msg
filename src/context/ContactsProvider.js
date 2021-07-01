@@ -12,7 +12,10 @@ export function ContactsProvider({children}){
         setContacts(prevContacts => {
             return [...prevContacts,{username}]
         })
+
     }
+        // socket.emit('reach','reach here')
+
     return(
        <ContactsContext.Provider value={{contacts,createContact}}>
            {children}
