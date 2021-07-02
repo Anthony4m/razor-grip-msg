@@ -21,7 +21,7 @@ const ChatPage = ()=>{
         setInput('')
     }
      return(
-         <div className="d-flex flex-column flex-grow-1">
+         <div className="d-flex flex-column chat-area flex-grow-1">
              <div className="flex-grow-1 overflow-auto">
                 <div className=" d-flex flex-column align-items-start justify-content-end px-3">
                     {selectedChat.messages.map((message,index)=>{
@@ -34,7 +34,7 @@ const ChatPage = ()=>{
                             >
                                 <div className="chat-bubble">
                                 <div className={`rounded px-2 py-1 ${message.messageOrigin ? ' text-white receiver-messages' : 'border sender-messages'}`}>
-                                    <div className={` small meta ? {message.messageOrigin ? 'text-right' : ''}`}>{message.messageOrigin ? "You": message.sentBy}   {time}</div>
+                                    <div className={` small meta ? {message.messageOrigin ? 'text-right' : ''}`}>{message.messageOrigin ? "You": message.sentBy}   {message.time}</div>
                                     {message.text}
                                 </div>
                                 </div>

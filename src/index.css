@@ -20,7 +20,10 @@ body {
   font-size: 16px;
   /*margin: 20px;*/
   overflow: hidden;
-    background-image: url("/images/chatbg2.jpg"), linear-gradient(rgba(2, 1, 2, 0.83), #d13531);;
+    /*background-image: url("/images/chatbg2.jpg"), linear-gradient(rgba(2, 1, 2, 0.83), #d13531);*/
+    background-image:
+            linear-gradient(to bottom, rgba(28, 28, 33, 0.87), rgba(16, 4, 13, 0.73)),
+            url('/images/chatbg2.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;

@@ -26,10 +26,10 @@ export function ChatsProvider({ children , sendor}) {
         })
     }
 
-    const addMessageToChat = useCallback(({ recipients, text, sender }) => {
+    const addMessageToChat = useCallback(({ recipients, text, sender,time }) => {
         setChats(prevChats => {
             let chatExist = false
-            const newMessage = { sender, text }
+            const newMessage = { sender, text,time }
             const newChats = prevChats.map(chat => {
                 if (arrayIsTheSame(chat.recipients, recipients)) {
                     chatExist = true

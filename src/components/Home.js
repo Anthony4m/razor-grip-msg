@@ -7,10 +7,10 @@ import {SocketProvider} from '../context/ServerConnectionProvider';
 const Home = ()=>{
     const {user} = useAuth0();
     return(
-        <SocketProvider sendor={user.given_name}>
+        <SocketProvider sendor={user.email}>
             <ChatsProvider sendor={user.given_name}>
                 <div className="home-view">
-                    <MainChat username={user.given_name}/>
+                    <MainChat username={user.email}/>
                 </div>
             </ChatsProvider>
         </SocketProvider>
