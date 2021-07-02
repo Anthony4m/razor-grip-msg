@@ -35,9 +35,8 @@ export function SocketProvider({ children, sendor }) {
         return () => newSocket.close()
     }, [sendor])
 
-    return ( <
-        SocketContext.Provider value = {
-            { socket, usersOnline } } > { children } <
-        /SocketContext.Provider>
+    return ( <SocketContext.Provider value = {
+            { socket, usersOnline } } > { children }
+    </SocketContext.Provider>
     )
 }
