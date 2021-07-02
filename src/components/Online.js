@@ -7,7 +7,7 @@ const Online = ()=>{
     return(
         <ListGroup variant = 'flush'>
             {usersOnline.map((userOnline,index)=>(
-                <ListGroup.Item key={index}>
+                <ListGroup.Item className="chat-list" key={index}>
                     {userOnline['usersOnline']}
                 </ListGroup.Item>
             ))}

@@ -25,15 +25,22 @@ const ChatPage = ()=>{
              <div className="flex-grow-1 overflow-auto">
                 <div className=" d-flex flex-column align-items-start justify-content-end px-3">
                     {selectedChat.messages.map((message,index)=>{
+                        const time = new Date().toLocaleTimeString()
                         const currentMessage = selectedChat.messages.length - 1 === index
                         return (
                             <div ref={currentMessage ? setCurrentMessageRef : null}
                                 key={index}
                                  className={`my-1 d-flex flex-column ${message.messageOrigin ? `align-self-end` : ''}`}
                             >
-                                <div className={`rounded px-2 py-1 ${message.messageOrigin ? 'bg-primary text-white' : 'border'}`}>{message.text}</div>
-                                <div className={`text-muted small ? {message.messageOrigin ? 'text-right' : ''}`}>{message.messageOrigin ? "You": message.sentBy}</div>
+                                <div className="chat-bubble">
+                                <div className={`rounded px-2 py-1 ${message.messageOrigin ? ' text-white receiver-messages' : 'border sender-messages'}`}>
+                                    <div className={` small meta ? {message.messageOrigin ? 'text-right' : ''}`}>{message.messageOrigin ? "You": message.sentBy}   {time}</div>
+                                    {message.text}
+                                </div>
+                                </div>
+
                             </div>
+
                         )})
                     }
                 </div>
@@ -42,14 +49,16 @@ const ChatPage = ()=>{
                  <Form.Group className="m-2">
                      <InputGroup>
                          <Form.Control
+                             className="chat-input-form"
                              as="textarea"
                              required
+                             placeholder="Type a message..."
                              value={input}
                              onChange={e => setInput(e.target.value)}
                              style={{ height: '75px', resize: 'none' }}
                          />
                          <InputGroup.Append>
-                             <Button type="submit">Send</Button>
+                             <Button type="submit" className="message-btn">Send</Button>
                          </InputGroup.Append>
                      </InputGroup>
                  </Form.Group>

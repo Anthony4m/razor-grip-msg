@@ -22,7 +22,7 @@ const NewChatsModal = ({modalClose})=>{
                         <Form.Label>username</Form.Label>
                         <Form.Control type ="text"  ref={usernameRef} required />
                     </Form.Group>
-                    <Button type="submit">Add User</Button>
+                    <Button type="submit" className="btn btn-submit">Add User</Button>
                 </Form>
             </Modal.Body>
         </React.Fragment>

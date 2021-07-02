@@ -40,7 +40,7 @@ const NewUsersModal = ({modalClose})=>{
                             />
                         </Form.Group>
                     ))}
-                    <Button type="submit">Add User</Button>
+                    <Button type="submit" className="btn btn-submit">Add User</Button>
                 </Form>
             </Modal.Body>
         </React.Fragment>

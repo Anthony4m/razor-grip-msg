@@ -17,13 +17,19 @@ export function SocketProvider({ children,sendor }) {
             { query: { sendor } }
         )
         setSocket(newSocket)
-        newSocket.emit('login',sendor)
+        newSocket.emit('login')
         // newSocket.on('loggedIn-users',message=>{console.log(message)})
         newSocket.on('loggedIn-users',usersOnline=>{
             setUsersOnline(prevUsers => {
                 return [...prevUsers,{usersOnline}]
             })
-            console.log(usersOnline)
+            // console.log(usersOnline)
+        })
+        newSocket.on('disconnect',usersOnline=>{
+            setUsersOnline(prevUsers => {
+                return [...prevUsers,{usersOnline}]
+            })
+            // console.log(usersOnline)
         })
 
 

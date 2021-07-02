@@ -5,9 +5,9 @@ import {useChats} from "../context/ChatsProvider";
 const Chats = ()=>{
     const {chats,selectChatIndex} = useChats();
     return(
-        <ListGroup variant = 'flush'>
+        <ListGroup  variant = 'flush'>
             {chats.map((chat,index)=>(
-                <ListGroup.Item key={index}
+                <ListGroup.Item className="chat-list" key={index}
                                 active={chat.selected}
                 action
                                 onClick={()=> selectChatIndex(index)}

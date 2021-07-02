@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 :root{
-  --dark-color-background-a : rgba(16, 15, 24, 0.95);
+  --dark-color-background-a : rgba(17, 16, 22, 0.93);
   --dark-color-background-b: rgba(0, 0, 0, 0.1);
   --dark-color-background-list-a: #3B2766;
-  --dark-color-sender-bg: #19182B;
-  --dark-color-receiver-bg: #4E38A1;
+  --dark-color-sender-bg: rgba(25, 24, 43, 0.48);
+  --dark-color-receiver-bg: rgba(78, 56, 161, 0.29);
   --text-color-a: #DEDEE0;
   --text-color-b: #6043D1;
 
@@ -16,10 +16,33 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+    color: #515151;
   font-size: 16px;
-  margin: 20px;
+  /*margin: 20px;*/
   overflow: hidden;
+    background-image: url("/images/chatbg2.jpg"), linear-gradient(rgba(2, 1, 2, 0.83), #d13531);;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
   background-color: var(--dark-color-background-a);
+
+}
+
+input[type=text]{
+    background: rgba( 255, 255, 255, 0.05 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 14.0px );
+    -webkit-backdrop-filter: blur( 14.0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+button{
+    background: rgba( 159, 81, 159, 0.65 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 20.0px );
+    -webkit-backdrop-filter: blur( 20.0px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 code {
