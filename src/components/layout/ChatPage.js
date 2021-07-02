@@ -13,7 +13,6 @@ const ChatPage = ()=>{
     const {sendMessage,selectedChat} = useChats();
     const handleSubmit = (e) =>{
         e.preventDefault()
-            console.log(input);
         sendMessage(
             selectedChat.recipients.map(receiver => receiver.id),
             input
